@@ -32,7 +32,7 @@ function LocationSelector() {
         //if country is updated with valid value, clear selected state and city, and fetch respective states 
         if(selectedCountry) {
 
-            console.log("selected country >>", selectedCountry);
+            // console.log("selected country >>", selectedCountry);
 
             fetch(`https://crio-location-selector.onrender.com/country=${selectedCountry}/states`)
             .then(data => data.json())
@@ -41,6 +41,7 @@ function LocationSelector() {
             })
             .catch(error => console.error("Error while fetching : ", error))
             setSeletedState("");
+            setCityData([]);
             setSelectedCity("");
         }
 
@@ -54,13 +55,19 @@ function LocationSelector() {
 
         if (selectedCountry && selectedState){
             fetch(`https://crio-location-selector.onrender.com/country=${selectedCountry}/state=${selectedState}/cities`)
-            .then(data => data.json())
-            .then(data => setCityData(data))
-            .catch(error => {
-                console.error("Error while fetching : ", error);
-                setCityData([]);
+            .then(data => {
+                // console.log("response.ok >>", data.ok);
+                if(!data.ok) {
+                    throw new Error("Error fetching data")
+                }
+                return data.json()
             })
-            setSelectedCity("");
+            .then(data => {
+                setCityData(data);
+                setSelectedCity("");
+                // console.log("city >>", data);
+            }).catch(error => console.log("Error fetching cities :", error))
+            
         }
 
     }, [selectedCountry, selectedState])
