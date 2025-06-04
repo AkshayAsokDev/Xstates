@@ -113,7 +113,7 @@ function LocationSelector() {
 
         {/* Conditional render */}
         {
-            selectedCity && <h3>{`You selected ${selectedCountry}, ${selectedState}, ${selectedCity}`}</h3>
+            selectedCity && <h3>{`You selected ${selectedCity}, ${selectedState}, ${selectedCountry}`}</h3>
         }
 
         
