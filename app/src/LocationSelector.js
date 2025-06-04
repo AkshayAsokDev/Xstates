@@ -113,7 +113,7 @@ function LocationSelector() {
 
         {/* Conditional render */}
         {
-            selectedCity && <h3>You selected <span style={{fontSize : "2rem"}}>{selectedCountry}</span>, <span style={{fontSize : "1.5rem", color : "grey"}} >{selectedState}</span>, <span style={{fontSize : "1rem", color : "grey"}} >{selectedCity}</span></h3>
+            selectedCity && <h3>{`You selected ${selectedCountry}, ${selectedState}, ${selectedCity}`}</h3>
         }
 
         
